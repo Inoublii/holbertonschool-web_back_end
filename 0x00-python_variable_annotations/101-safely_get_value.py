@@ -6,7 +6,7 @@ from typing import Union, Any, Mapping, List, TypeVar
 
 
 def safely_get_value(dct: Mapping, key: Any,
-                    default: Union[TypeVar('T')] = None)\
+                    default: Union[TypeVar('T'), None] = None)\
                     -> Union[Any, TypeVar('T')]:
     """
     safely_get_value
