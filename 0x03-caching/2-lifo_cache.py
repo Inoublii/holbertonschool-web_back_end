@@ -14,7 +14,6 @@ class LIFOCache(BaseCaching):
         """
         assign to the dictionary"""
         if key and item:
-            self.order.append(key)
             if key in self.cache_data:
                 self.cache_data[key] = item
             else:
