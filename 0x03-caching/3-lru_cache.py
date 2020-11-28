@@ -19,11 +19,11 @@ class LRUCache(BaseCaching):
                 self.lru_order.remove(key)
             else:
                 if len(self.cache_data) >= self.MAX_ITEMS:
-                    del self.cache_data[self.order[0]]
-                    print("DISCARD:", self.order[0])
-                    self.order.pop(0)
+                    del self.cache_data[self.lru_order[0]]
+                    print("DISCARD:", self.lru_order[0])
+                    self.lru_order.pop(0)
                 self.cache_data[key] = item
-            self.order.append(key)
+            self.lru_order.append(key)
 
     def get(self, key):
         """return the value of key"""
