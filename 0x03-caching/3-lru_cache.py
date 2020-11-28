@@ -3,7 +3,7 @@
 from base_caching import BaseCaching
 
 
-class LIFOCache(BaseCaching):
+class LRUCache(BaseCaching):
     """ LRU CLASS """
     def __init__(self):
         """ self init """
