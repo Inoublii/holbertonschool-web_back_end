@@ -3,7 +3,7 @@
 from base_caching import BaseCaching
 
 
-class LIFOCache(BaseCaching):
+class MRUCache(BaseCaching):
     """ MRU CLASS """
     def __init__(self):
         """ self init """
@@ -19,11 +19,11 @@ class LIFOCache(BaseCaching):
                 self.mru_order.remove(key)
             else:
                 if len(self.cache_data) >= self.MAX_ITEMS:
-                    del self.cache_data[self.order[-1]]
-                    print("DISCARD:", self.order[-1])
-                    self.order.pop(-1)
+                    del self.cache_data[self.mru_order[-1]]
+                    print("DISCARD:", self.mru_order[-1])
+                    self.mru_order.pop(-1)
                 self.cache_data[key] = item
-            self.order.append(key)
+            self.mru_order.append(key)
 
     def get(self, key):
         """return the value of key"""
