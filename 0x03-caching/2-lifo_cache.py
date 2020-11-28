@@ -17,7 +17,6 @@ class LIFOCache(BaseCaching):
             self.order.append(key)
             if key in self.cache_data:
                 self.cache_data[key] = item
-                self.order.remove(key)
             else:
                 if len(self.cache_data) >= self.MAX_ITEMS:
                     del self.cache_data[self.order[-1]]
