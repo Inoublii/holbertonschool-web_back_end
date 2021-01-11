@@ -33,6 +33,7 @@ def before_request():
 
 
 def get_user(id):
+    """get user"""
     if id in users:
         return users[id]
     return None
