@@ -2,6 +2,7 @@
 """ flask app"""
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
+import pytz
 
 app = Flask(__name__)
 
@@ -46,7 +47,7 @@ def hello():
     login = False
     if g.get('user') is not None:
         login = True
-    return render_template('6-index.html', login=login)
+    return render_template('7-index.html', login=login)
 
 
 @babel.localeselector
@@ -58,6 +59,7 @@ def get_locale():
     if (g.get('user') and g.user["locale"] in app.config['LANGUAGES']):
         return g.user["locale"]
     return(request.accept_languages.best_match(app.config['LANGUAGES']))
+
 
 @babel.timezoneselector
 def get_timezone() -> str:
