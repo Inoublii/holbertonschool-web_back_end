@@ -60,17 +60,6 @@ def get_locale():
     return(request.accept_languages.best_match(app.config['LANGUAGES']))
 
 
-@babel.timezoneselector
-def get_timezone() -> str:
-    "returns the timezone"
-    try:
-        if request.args.get('timezone'):
-            return str(pytz.timezone(request.args.get('timezone')))
-        if g.get('user') and g.user.get('timezone'):
-            return str(pytz.timezone(g.user['timezone']))
-    except pytz.exceptions.UnknownTimeZoneError:
-        pass
-    return app.config["BABEL_DEFAULT_TIMEZONE"]
 
 
 if __name__ == '__main__':
