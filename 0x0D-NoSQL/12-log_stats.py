@@ -12,7 +12,7 @@ def getlogs():
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx = client.logs.nginx
 
-    print("{} logs".format(nginx.count_documents({})))
+    print(nginx.count_documents({})," logs")
 
     print("Methods:")
 
@@ -23,9 +23,9 @@ def getlogs():
             )
         )
 
-    print("{} status check".format(
+    print(
         nginx.count_documents(
-            {'method': 'GET', 'path': '/status'})
-        ))
+            {'method': 'GET', 'path': '/status'})," status check"
+        )
 if __name__ == "__main__":
     getlogs()
