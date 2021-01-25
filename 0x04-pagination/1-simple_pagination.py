@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-function named index_range that takes two integer arguments page and page_size
+function named inex_range
 """
 import csv
 import math
@@ -9,7 +9,7 @@ from typing import List
 
 
 class Server:
-    """Server class to paginate a database of popular baby names."""
+    """Server class to paginate a database"""
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
@@ -26,9 +26,9 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Use assert to verify that both arguments are integers greater than 0"""
-        assert (isinstance(page, int) and isinstance(page_size, int)
-        and page > 0 and page_size > 0)
+        """verify that both arguments are integers greater than 0"""
+        assert (isinstance(page, int) and isinstance(
+            page_size, int) and page > 0 and page_size > 0)
         range = index_range(page, page_size)
         self.dataset()
         return self.__dataset[range[0]:range[1]]
@@ -36,7 +36,6 @@ class Server:
     def index_range(self, page, page_size):
         """
         function named index_range that takes two integer arguments:
-        page and page_size.
         """
         x = (page - 1) * page_size
         return (x, x + page_size)
