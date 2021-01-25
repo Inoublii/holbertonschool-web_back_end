@@ -1,0 +1,2 @@
+// Lists all name Holberton in school
+db.school.find({"name": /^Holberton/})
