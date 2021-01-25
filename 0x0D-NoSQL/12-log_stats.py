@@ -15,7 +15,7 @@ def getlogs() -> None:
 
     nginx = client.logs.nginx
 
-    print(nginx.count_documents({}), " logs")
+    print(nginx.count_documents({}) + " logs")
 
     print("Methods:")
 
