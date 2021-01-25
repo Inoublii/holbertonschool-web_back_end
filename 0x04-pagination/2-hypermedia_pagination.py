@@ -29,7 +29,7 @@ class Server:
         """Use assert to verify"""
         assert (isinstance(page, int) and isinstance(
             page_size, int)and page > 0 and page_size > 0)
-        range = index_range(page, page_size)
+        range = Server().index_range(page, page_size)
         self.dataset()
         return self.__dataset[range[0]:range[1]]
 
