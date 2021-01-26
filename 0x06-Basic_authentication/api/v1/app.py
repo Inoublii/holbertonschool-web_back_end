@@ -18,21 +18,23 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
-if os.getenv("AUTH_TYPE") == "auth":
+auth = os.getenv('AUTH_TYPE')
+if auth:
     auth = Auth()
-
 
 @app.before_request
 def before_request_func():
     """ validate.
     """
     excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
-    if auth:
-        if not auth.require_auth(request.path, excluded_paths):
-            if auth.authorization_header(request) is None:
-                abort(401)
-            if auth.current_user(request) is None:
-                abort(403)
+    if auth is None:
+        pass
+    if auth.require_auth(request.path, excluded_paths):
+        pass
+    if auth.authorization_header(request) is None:
+        abort(401)
+    if auth.current_user(request) is None:
+        abort(403)
 
 
 @app.errorhandler(401)
