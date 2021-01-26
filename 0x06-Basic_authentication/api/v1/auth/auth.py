@@ -7,12 +7,11 @@ from typing import List, TypeVar
 
 
 class Auth:
-    """ Auth class.
-    """
+    """ Auth class."""
 
     def __init__(self):
-            """ Constructor"""
-            pass
+        """ Constructor"""
+        pass
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Returns False - path"""
