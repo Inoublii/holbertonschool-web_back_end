@@ -1,3 +1,3 @@
-export default function hasValuesFromArray(set, array) {
-  return array.filter((x) => set.has(x)).length === array.length;
-}
+export default function setFromArray(array) {
+	return new Set(array);
+  }
