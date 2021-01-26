@@ -14,7 +14,6 @@ class Auth:
             """ Constructor"""
             pass
 
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Returns False - path"""
         return False
