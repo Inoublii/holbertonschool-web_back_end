@@ -79,12 +79,23 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     """ class """
     @classmethod
     def setUpClass(cls):
-        """ It is part of the unittest.TestCase API
+        """  unittest.TestCase API
         method to return example payloads found in the fixtures """
         cls.get_patcher = patch('requests.get', side_effect=HTTPError)
 
     @classmethod
     def tearDownClass(cls):
-        """ It is part of the unittest.TestCase API
+        """the unittest.TestCase API
         method to stop the patcher """
         cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """ Testing GithubOrgClient.public_repos """
+        ghoc = GithubOrgClient('random')
+        self.assertEqual(ghoc.org, self.org_payload)
+        self.assertEqual(ghoc.repos_payload, self.repos_payload)
+
+    def test_public_repos_with_license(self):
+        """ Testing public_repos with the argument license="apache-2.0" """
+        ghoc = client.GithubOrgClient('random')
+        self.assertEqual(ghoc.public_repos('apache-2.0'), self.apache2_repos)
