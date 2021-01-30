@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """ Test SUITE Unittest module Task """
-import requests
-from unittest import mock,patch
 import unittest
 from parameterized import parameterized
 
-from utils import access_nested_map, get_json
+from utils import access_nested_map
 
 
 class TestAccessNestedMap(unittest.TestCase):
