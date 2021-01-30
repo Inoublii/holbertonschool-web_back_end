@@ -82,6 +82,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """  unittest.TestCase API
         method to return example payloads found in the fixtures """
         cls.get_patcher = patch('requests.get', side_effect=HTTPError)
+        cls.mock = cls.get_patcher.start()
 
     @classmethod
     def tearDownClass(cls):
