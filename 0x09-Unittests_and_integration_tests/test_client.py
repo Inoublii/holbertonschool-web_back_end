@@ -28,8 +28,8 @@ class TestGithubOrgClient(TestCase):
 
     def test_public_repos_url(self):
         """ Tests if GithubOrgClient._public_repos_url result is correct """
-        with patch('client.GithubOrgClient.org',
-                    new_callable=PropertyMock) as mock:
+        with patch(
+             'client.GithubOrgClient.org', new_callable=PropertyMock) as mock:
             mock.return_value = {'repos_url': 'http://mock.url'}
             gc = GithubOrgClient('xyz')
             r = gc._public_repos_url
@@ -46,8 +46,9 @@ class TestGithubOrgClient(TestCase):
 
         ]
         get_json_mock()
-        with patch('client.GithubOrgClient._public_repos_url',
-        new_callable=PropertyMock) as mocked_public_repos:
+        with patch(
+            'client.GithubOrgClient._public_repos_url',
+                new_callable=PropertyMock) as mocked_public_repos:
             mocked_public_repos.return_value = [
                 {'name': 'rand'},
                 {'name': 'rand1'},
