@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """ Test SUITE Unittest module Task """
 import requests
-from unittest import mock,patch
+from unittest import Mock,patch, PropertyMock
 import unittest
 from parameterized import parameterized
 
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -45,6 +45,8 @@ class TestGetJson(unittest.TestCase):
             mock_request.get.return_value = expected_result
             x = mock_request.get(url)
             self.assertEqual(expected_result, x)
+
+
 class TestMemoize(unittest.TestCase):
     """
     utils.memoize tests.
