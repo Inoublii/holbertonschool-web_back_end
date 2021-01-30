@@ -1,6 +1,6 @@
-
 #!/usr/bin/env python3
-""" Unittest module """
+""" Unittest
+"""
 
 from unittest import TestCase, mock
 from unittest.mock import patch, Mock
@@ -25,3 +25,13 @@ class TestGithubOrgClient(TestCase):
         mock_json.assert_called_once_with(
             f"https://api.github.com/orgs/{org_name}"
             )
+
+
+    def test_public_repos_url(self):
+        """ Tests if GithubOrgClient._public_repos_url result is correct """
+        with patch('client.GithubOrgClient.org',
+             new_callable=PropertyMock) as mock:
+            mock.return_value = {'repos_url': 'http://mock.url'}
+            gc = GithubOrgClient('xyz')
+            r = gc._public_repos_url
+            self.assertEqual(r, 'test')
