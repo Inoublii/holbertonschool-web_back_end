@@ -8,9 +8,11 @@ from utils import access_nested_map, get_json
 import requests
 from unittest import mock
 
+
 class TestAccessNestedMap(unittest.TestCase):
     """ Class for testing Nested Map function """
     self.assertRaises(KeyError, access_nested_map, nested_map, path)
+
 
 class TestGetJson(unittest.TestCase):
     '''
