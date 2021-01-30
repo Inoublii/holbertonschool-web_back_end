@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """ Test SUITE Unittest module Task """
 import requests
-from unittest import mock, patch
+from unittest import mock
+from unittest.mock import patch, PropertyMock
 import unittest
 from parameterized import parameterized
 
