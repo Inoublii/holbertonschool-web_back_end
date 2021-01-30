@@ -90,12 +90,21 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher.stop()
 
     def test_public_repos(self):
-        """ Testing GithubOrgClient.public_repos """
-        ghoc = GithubOrgClient('random')
-        self.assertEqual(ghoc.org, self.org_payload)
-        self.assertEqual(ghoc.repos_payload, self.repos_payload)
+        """ Integration test: public repos"""
+        test_class = GithubOrgClient("google")
+
+        self.assertEqual(test_class.org, self.org_payload)
+        self.assertEqual(test_class.repos_payload, self.repos_payload)
+        self.assertEqual(test_class.public_repos(), self.expected_repos)
+        self.assertEqual(test_class.public_repos("XLICENSE"), [])
+        self.mock.assert_called()
 
     def test_public_repos_with_license(self):
-        """ Testing public_repos with the argument license="apache-2.0" """
-        ghoc = client.GithubOrgClient('random')
-        self.assertEqual(ghoc.public_repos('apache-2.0'), self.apache2_repos)
+        """ Integration test for public repos with License """
+        test_class = GithubOrgClient("google")
+
+        self.assertEqual(test_class.public_repos(), self.expected_repos)
+        self.assertEqual(test_class.public_repos("XLICENSE"), [])
+        self.assertEqual(test_class.public_repos(
+            "apache-2.0"), self.apache2_repos)
+        self.mock.assert_called()
