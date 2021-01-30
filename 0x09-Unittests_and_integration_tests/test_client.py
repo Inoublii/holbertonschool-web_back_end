@@ -3,9 +3,10 @@
 """
 
 from unittest import TestCase, mock
+import unittest
 from unittest.mock import patch, PropertyMock
-from parameterized import parameterized
-
+from parameterized import parameterized, parameterized_class
+from fixtures import TEST_PAYLOAD
 import client
 from client import GithubOrgClient
 
@@ -68,3 +69,22 @@ class TestGithubOrgClient(TestCase):
         """ unit-test for GithubOrgClient.has_license """
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
+
+
+@parameterized_class(
+    ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
+    TEST_PAYLOAD
+)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ class """
+    @classmethod
+    def setUpClass(cls):
+        """ It is part of the unittest.TestCase API
+        method to return example payloads found in the fixtures """
+        cls.get_patcher = patch('requests.get', side_effect=HTTPError)
+
+    @classmethod
+    def tearDownClass(cls):
+        """ It is part of the unittest.TestCase API
+        method to stop the patcher """
+        cls.get_patcher.stop()
