@@ -91,7 +91,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos(self):
         """public repos"""
-        test_class = GithubOrgClient("random")
+        test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.org, self.org_payload)
         self.assertEqual(test_class.repos_payload, self.repos_payload)
@@ -101,7 +101,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos_with_license(self):
         """  public repos with License """
-        test_class = GithubOrgClient("random")
+        test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.public_repos(), self.expected_repos)
         self.assertEqual(test_class.public_repos("XLICENSE"), [])
