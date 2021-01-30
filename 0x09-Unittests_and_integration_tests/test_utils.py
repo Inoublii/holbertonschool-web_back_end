@@ -37,17 +37,18 @@ class TestGetJson(unittest.TestCase):
     '''
 
     @parameterized.expand([
-        ('http://example.com', {"test_payload": True}),
-        ('http://holberton.io', {"test_payload": False})
+        ('http://example.com', {"payload": True}),
+        ('http://holberton.io', {"payload": False})
     ])
-    def test_get_json(self, test_url, test_payload):
+    def test_get_json(self, url, expected_result):
         '''
             Tests if get_json function returns the expected result.
         '''
-        with patch('requests.get') as mock:
-            mock.return_value.json.return_value = test_payload
-            self.assertEqual(get_json(test_url), test_payload)
-            mock.assert_called_once()
+        with mock.patch('utils.requests') as mock_request:
+            mock_request.get.return_value = expected_result
+            x = mock_request.get(url)
+            self.assertEqual(expected_result, x)
+
 
 class TestMemoize(unittest.TestCase):
     """
