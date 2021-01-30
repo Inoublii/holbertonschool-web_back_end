@@ -27,3 +27,20 @@ class TestAccessNestedMap(unittest.TestCase):
             Tests access_nested_map for raised expections.
         '''
         self.assertRaises(KeyError, access_nested_map, nested_map, path)
+class TestGetJson(unittest.TestCase):
+    '''
+    get_json tests.
+    '''
+
+    @parameterized.expand([
+        ('http://example.com', {"payload": True}),
+        ('http://holberton.io', {"payload": False})
+    ])
+    def test_get_json(self, url, expected_result):
+        '''
+            Tests if get_json function returns the expected result.
+        '''
+        with mock.patch('utils.requests') as mock_request:
+            mock_request.get.return_value = expected_result
+            x = mock_request.get(url)
+            self.assertEqual(expected_result, x)
