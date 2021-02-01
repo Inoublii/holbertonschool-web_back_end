@@ -52,13 +52,13 @@ class BasicAuth(Auth):
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """ returns the User instance based on his email and password """
-        if (
-           not user_email or
-           not isinstance(user_email, str) or
-           not user_pwd or
-           not isinstance(user_pwd, str)
-           ):
+        if user_email is None or type(user_email) is not str:
             return None
+        if user_pwd is None or type(user_pwd) is not str:
+            return None
+        user_credentials = {
+            'email': user_email,
+        }
         objs = User().search({"email": user_email})
         if not objs:
             return None
@@ -67,28 +67,11 @@ class BasicAuth(Auth):
         return objs[0]
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """
-        Overloads Auth and retrieves instance of a request.
-        """
-        auth_header = self.authorization_header(request)
-        if auth_header is None:
+        """ overloads Auth and retrieves instance of a request """
+        if not request:
             return None
-
-        b64_auth_header = self.extract_base64_authorization_header(auth_header)
-        if b64_auth_header is None:
-            return None
-
-        decoded_b64_auth_header = self.decode_base64_authorization_header(
-            b64_auth_header)
-        if decoded_b64_auth_header is None:
-            return None
-
-        creds = self.extract_user_credentials(decoded_b64_auth_header)
-        if creds is None:
-            return None
-
-        user_obj = self.user_object_from_credentials(creds[0], creds[1])
-        if user_obj is None:
-            return None
-
-        return user_obj
+        auth_header = request.headers["Authorization"]
+        authorization_header = extract_base64_authorization_header(auth_header)
+        dec_header = decode_base64_authorization_header(authorization_header)
+        credentials = extract_user_credentials(dec_header)
+        return user_object_from_credentials(credentials[0], credentials[1])
