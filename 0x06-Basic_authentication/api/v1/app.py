@@ -40,7 +40,6 @@ def before_request_func():
         abort(403)
 
 
-
 @app.errorhandler(401)
 def unauthorized(error):
     """ Unauthorized handler.
