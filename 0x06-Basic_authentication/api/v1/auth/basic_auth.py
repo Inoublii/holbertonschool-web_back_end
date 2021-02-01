@@ -72,6 +72,6 @@ class BasicAuth(Auth):
             return None
         auth_header = request.headers["Authorization"]
         authorization_header = extract_base64_authorization_header(auth_header)
-        dec_header = decode_base64_authorization_header(authorization_header)
+        dec_header = decode_base64_authorization_header(auth_header)
         credentials = extract_user_credentials(dec_header)
         return user_object_from_credentials(credentials[0], credentials[1])
