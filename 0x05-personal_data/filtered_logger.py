@@ -71,3 +71,29 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
       database=os.getenv('PERSONAL_DATA_DB_NAME')
     )
     return c
+
+
+def main() -> None:
+    """Obtains a database connection using get_db and retrieve all rows
+    in the users table and display each row under a filtered format.
+    """
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users")
+    records = cursor.fetchall()
+    logger = get_logger()
+
+    fields = [x[0] for x in cursor.description]
+
+    for row in records:
+        msg = ''
+        for i in range(len(fields)):
+            msg += fields[i] + '=' + str(row[i]) + ';'
+        logger.info(msg)
+
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
